@@ -10,11 +10,12 @@ var destination = Vector2() #destination of hero
 var movement = Vector2() #movement to be pushed to the engine
 var grapeller_length = 700
 
+onready var enviroment = $"../GrappleAbleTileMap"
 
 func _unhandled_input(event):
 	if event.is_action_pressed("Left Click"):
 		destination = get_global_mouse_position()
-		if position.distance_to(destination) < grapeller_length:
+		if position.distance_to(destination) < grapeller_length and enviroment.get_cellv(enviroment.world_to_map(destination)) != -1:
 			is_grappling = true
 
 
@@ -25,7 +26,6 @@ func _physics_process(delta):
 func move_hero(delta):
 	if is_grappling == false:
 		movement.y += gravity
-		movement.x 
 	else:
 		speed += accleration * delta
 		if speed > max_speed:
@@ -36,5 +36,5 @@ func move_hero(delta):
 		is_grappling = false
 	movement = move_and_slide(movement,Vector2.UP)
 	if is_on_ceiling() or is_on_floor() or is_on_wall():
-		movement.x = 0 
+		movement.x = 0
 		is_grappling = false
