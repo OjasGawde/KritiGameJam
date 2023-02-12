@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 var max_speed = 1200 #max speed of hero
 var speed = 0 #current speed of hero
-var gravity = 30 #gravity applied when 
+var gravity = 10 #gravity applied when 
 var accleration = 3000 #accleration hero
 var move_direction #direction of motion of hero
 var is_grappling = false #flag for movement of hero
 var destination = Vector2() #destination of hero
 var movement = Vector2() #movement to be pushed to the engine
-var grapeller_length = 700
+var grapeller_length = 1000
 
 onready var enviroment = $"../GrappleAbleTileMap"
 
@@ -25,7 +25,7 @@ func _physics_process(delta):
 
 func move_hero(delta):
 	if is_grappling == false:
-		movement.y += gravity
+		movement.y = min((movement.y + gravity), max_speed)
 	else:
 		speed += accleration * delta
 		if speed > max_speed:

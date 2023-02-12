@@ -26,3 +26,13 @@ frames = SubResource( 1 )
 
 [node name="HeroCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.19
+editor_draw_limits = true
+editor_draw_drag_margin = true
